@@ -6,7 +6,7 @@ clean:
 	rm -rf app/node_modules app/dist
 
 env:
-	docker run -it -v "$(shell pwd):/home/node:Z" -w=/home/node -u node $(IMG):$(V) npx create-react-app .
+	docker run -it -v "$(shell pwd):/home/node:Z" -w=/home/node -u node $(IMG):$(V) npx create-react-app app
 add:
 ifdef PACKAGE
 	docker run -it -v "$(shell pwd):/home/node:Z" -w=/home/node/app -u node $(IMG):$(V) npm install $(PKG)
