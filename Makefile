@@ -9,7 +9,7 @@ env:
 	docker run -it --rm -v "$(shell pwd):/home/node:Z" -w=/home/node -u node $(IMG):$(V) npx create-react-app app
 add:
 ifdef PACKAGE
-	docker run -it --rm -v "$(shell pwd):/home/node:Z" -w=/home/node/app -u node $(IMG):$(V) npm install $(PACKAGE)
+	docker run -it --rm -v "$(shell pwd):/home/node:Z" -w=/home/node/app -u node $(IMG):$(V) npm install $(PACKAGE) --save
 	PACKAGE=""
 else
 	@echo "set PACKAGE in your environment before calling make add, e.g.:"
