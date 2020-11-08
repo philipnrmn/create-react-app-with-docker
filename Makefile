@@ -6,10 +6,10 @@ clean:
 	rm -rf app/node_modules app/dist
 
 env:
-	docker run -it -v "$(shell pwd):/home/node:Z" -w=/home/node -u node $(IMG):$(V) npx create-react-app app
+	docker run -it --rm -v "$(shell pwd):/home/node:Z" -w=/home/node -u node $(IMG):$(V) npx create-react-app app
 add:
 ifdef PACKAGE
-	docker run -it -v "$(shell pwd):/home/node:Z" -w=/home/node/app -u node $(IMG):$(V) npm install $(PKG)
+	docker run -it --rm -v "$(shell pwd):/home/node:Z" -w=/home/node/app -u node $(IMG):$(V) npm install $(PKG)
 	PACKAGE=""
 else
 	@echo "set PACKAGE in your environment before calling make add, e.g.:"
@@ -17,10 +17,10 @@ else
 endif
 
 deps:
-	docker run -it -v "$(shell pwd):/home/node:Z" -w=/home/node/app -u node $(IMG):$(V) npm install
+	docker run -it --rm -v "$(shell pwd):/home/node:Z" -w=/home/node/app -u node $(IMG):$(V) npm install
 
 run:
-	docker run -it -v "$(shell pwd):/home/node:Z" -p 3000:3000 -w=/home/node/app -u node $(IMG):$(V) npm start
+	docker run -it --rm -v "$(shell pwd):/home/node:Z" -p 3000:3000 -w=/home/node/app -u node $(IMG):$(V) npm start
 
 dist:
-	docker run -it -v "$(shell pwd):/home/node:Z" -w=/home/node/app -u node $(IMG):$(V) npm run-script build
+	docker run -it --rm -v "$(shell pwd):/home/node:Z" -w=/home/node/app -u node $(IMG):$(V) npm run-script build
